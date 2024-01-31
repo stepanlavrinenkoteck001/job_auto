@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "ai_core"
+version = "0.1.0"
+description = "job autopilot ai code base"
+authors = ["Stepan Lavrinenko"]
+license = "commercial"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+gpt4all = "^0.3.0"
+pandas = "^2.0.2"
+openai = "^0.27.7"
+spacy = "^3.5.3"
+scipy = "^1.10.1"
+gensim = "^4.3.1"
+python-dotenv = "^1.0.0"
+qdrant-client = "^1.3.1"
+psycopg2 = "^2.9.6"
+flask = "^2.3.3"
+
+
+[tool.poetry.group.dev.dependencies]
+sentence-transformers = "^2.2.2"
+ipykernel = "^6.23.1"
+transformers = {extras = ["torch"], version = "^4.29.2"}
+accelerate = "^0.20.1"
+spacy = "^3.5.3"
+gpt4all = "^0.3.0"
+sqlalchemy = "^2.0.17"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

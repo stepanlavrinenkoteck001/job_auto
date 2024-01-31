@@ -1,0 +1,21 @@
+# data
+*.zip
+*.csv
+*json
+data/*
+
+#  model artifacts
+*.npy
+*.bin
+.model
+
+#jupyter
+.ipynb_checkpoints
+
+#python cache
+*.pyc
+# passwords
+.env
+
+.idea
+venv/

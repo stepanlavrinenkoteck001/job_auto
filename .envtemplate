@@ -1,0 +1,14 @@
+OPENAI_API_KEY = '<open ai api key, can find it here: https://platform.openai.com/account/api-keys>'
+QDRANT_DB_URL = 'http://127.0.0.1'
+QDRANT_DB_PORT = '6333'
+POSTGRES_DB_URL = 'localhost'
+POSTGRES_DB_PORT = '5432'
+POSTGRES_DB_NAME = '<postgres database name for stage zone>'
+POSTGRES_DB_USER = '<postgres user name for stage zone>'
+POSTGRES_DB_PASS = '<postgres password for stage zone>'
+PARENT_FOLDER_PATH = '<path to ai_core folder, example: d:/project/ai_job_autopilot/gitlab/ai_core/>'
+HIST_QA_RETURN_LIMIT = '<int, number of historical question-answer pairs to be returned>'
+GPT_ANSWER_RETURN_LIMIT = '<int, number of gpt-tuned answer pairs to be returned>'
+GPT_MODEL_TO_USE = 'chatgpt'  #or gpt4all
+QDRANT_QUESTIONS_TABLE_NAME = 'questions'
+PORT=3000

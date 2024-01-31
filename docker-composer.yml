@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  qdrant:
+    image: qdrant/qdrant:v1.2.2
+    ports:
+      - 6333:6333
+    volumes:
+      - db:/qdrant/storage
+#curl -X PUT 'http://localhost:6333/collections/questions'      -H 'Content-Type: application/json'     --data-raw '{"vectors": {"size": 200,"distance": "Cosine"}}'
+volumes:
+  db:
+    driver: local

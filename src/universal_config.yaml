@@ -1,0 +1,27 @@
+utils:
+  log_level : 'INFO'
+
+gpt_model_constants:    ## chatgpt and gpt4all generated file paths and model paths
+  # model type is chosen in pipeline-specific config
+  model_path: 'job_posts/artifacts/gpt_models'
+  chatgpt:
+    gpt_output_path: 'chatgpt_output.csv'
+    gpt_model_str: 'gpt-3.5-turbo'
+  gpt4all:
+    gpt_output_path: 'gpt4all_output.csv'
+    gpt_model_str: 'ggml-gpt4all-j-v1.3-groovy'
+
+database:
+  qdrant:
+    vec_size: 300
+  postgres:
+    forms:
+      table_name: 'forms_auto_fill'
+    questions: 
+      table_name: 'questions'
+    posting:
+      table_name: 'posting'
+
+
+
+

@@ -1,0 +1,10 @@
+gpt_model_constants:    ## chatgpt and gpt4all generated file paths and model paths
+  chatgpt:
+    chatgpt_api_timing_delay: True
+  default_prompt_strings:
+    # system_string: "Act like a job applicant."
+    system_string: ""
+    user_string: "Based on existing questions and responses, answer the new question below. Remove words existing answer or existing question. substring_to_replace New question: new_question. New answer:"
+    substring_to_replace: "Existing question: hist_question Existing answer: hist_answer"
+    different_answer_user_string: 'Generate a different answer based on prior information. New answer:'
+  

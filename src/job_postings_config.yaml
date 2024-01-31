@@ -1,0 +1,12 @@
+ingestion:
+  data_paths:
+    job_descr_path: 'job_posts/original_data/jd1.json'
+    prep_data_path: 'job_posts/prep_data'
+
+gpt_model_constants:    
+  chatgpt:
+    chatgpt_api_timing_delay: True
+  gpt_model_to_use: 'chatgpt'
+  default_prompt_strings:  ## chatgpt and gpt4all prompts for job posting summarization
+    system_string: "Act like a researcher. Give me a list of keywords for a job description I will provide you with that I can use to find a candidate for the position. Act like an expert in this field, include additional keywords that may not be in the job description."
+    user_string: 'List the hard tech skills, responsibilities and technical tool knowledge the job posting above requires.'

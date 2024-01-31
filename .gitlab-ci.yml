@@ -1,0 +1,42 @@
+default:
+  tags:
+    - dev
+
+variables:
+  PYTHON_VERSION: "3.11"
+  # CI_DEBUG_TRACE: 1
+
+include:
+  - project: 'development/gitlab-templates'
+    #  without ref: master is used
+    file: ["/templates/.gitlab-ci-build-container-template.yml",
+            "/templates/.gitlab-ci-deployment-template.yml"]
+
+stages:
+  - build
+  - deploy
+
+docker-build-dev:
+  extends: .build_dev
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --build-arg PYTHON_VERSION=$PYTHON_VERSION
+      --dockerfile "${CI_PROJECT_DIR}/.deployment/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}"
+
+docker-build-stage:
+  extends: .build_stage
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --build-arg PYTHON_VERSION=$PYTHON_VERSION
+      --dockerfile "${CI_PROJECT_DIR}/.deployment/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}"
+
+
+deploy_dev:
+  extends: .deploy_dev
+
+deploy_stage:
+  extends: .deploy_stage

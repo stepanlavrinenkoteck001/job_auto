@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jap-ai-core${URI}
+  namespace: ${CI_ENVIRONMENT_NAME}
+  labels:
+    app.kubernetes.io/instance: jap-ai-core
+    k8s-app: jap-ai-core${URI}    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: jap-ai-core${URI}
+  template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
+      labels:
+        k8s-app: jap-ai-core${URI}
+        release: jap-ai-core
+    spec:
+      serviceAccountName: ${K8S_SERVICEACCOUNT_NAME}
+      containers:
+      - name: jap-ai-core
+        image: ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: http
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+        env:
+        - name: POSTGRES_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: ${POSTGRES_DB_PERMISSIONS}
+              key: username
+        - name: POSTGRES_DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ${POSTGRES_DB_PERMISSIONS}
+              key: password
+        envFrom:
+          - configMapRef:
+              name: jap-ai-core-configmap-env${URI}
+          - secretRef:
+              name: jap-ai-core-secret-env${URI}
+        volumeMounts:
+          - name: gcs-fuse-csi-ephemeral
+            mountPath: /data
+            readOnly: true
+      volumes:
+        - name: gcs-fuse-csi-ephemeral
+          csi:
+            driver: gcsfuse.csi.storage.gke.io
+            readOnly: true
+            volumeAttributes:
+              bucketName: ${AI_MODELS_BUCKET_NAME}
+              mountOptions: "implicit-dirs"
+      imagePullSecrets: 
+        - name: gitlab-pull-secret
